@@ -1,8 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const deleteHandler = (itemIndex, price) => {
+    dispatch({ type: "DELETE", payLoad: { itemIndex, price } });
+  };
   return (
     <div className="customDiv">
       <h1>Cart Component</h1>
@@ -10,7 +14,11 @@ const Cart = () => {
 
       <ul>
         {cart.map((product, index) => {
-          return <li key={index}>{product.pName}</li>;
+          return (
+            <li key={index} onClick={() => deleteHandler(index, product.price)}>
+              {product.pName}
+            </li>
+          );
         })}
       </ul>
     </div>

@@ -20,6 +20,13 @@ const reducer = (state = initData, action) => {
       total: state.total + parseInt(action.payLoad.price),
     };
   }
+  if (action.type === "DELETE") {
+    return {
+      ...state,
+      cart: state.cart.filter((i, index) => index != action.itemIndex),
+      total: state.total - action.payLoad.price,
+    };
+  }
   return state;
 };
 
