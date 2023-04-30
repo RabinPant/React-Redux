@@ -1,17 +1,20 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const Purchase = () => {
-  const products = [
-    { pName: "Apple", price: 20 },
-    { pName: "Banana", price: 3 },
-    { pName: "Orange", price: 10 },
-    { pName: "Grapes", price: 8 },
-  ];
+  const products = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  const purchaseHandler = (e) => {
+    let pName = e.target.options[e.target.selectedIndex].text;
+    let price = e.target.value;
+    let obj = { pName, price };
+    dispatch({ type: "PURCHASE", payLoad: obj });
+  };
   return (
     <div className="customDiv">
       <h1>Purchase Component</h1>
       <hr />
-      <select>
+      <select onChange={(e) => purchaseHandler(e)}>
         {products.map((product, index) => {
           return (
             <option value={product.price} key={index}>

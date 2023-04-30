@@ -1,8 +1,8 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const Total = () => {
-  const Total = 0;
-
+  const Total = useSelector((state) => state.total);
   return (
     <div className="customDiv">
       <h1>Total Component</h1>
